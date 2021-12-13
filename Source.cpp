@@ -11,11 +11,11 @@ string customers[] = { "Customer 1", "Customer 2", "Customer 3", "Customer 4", "
 string transactionType[] = { "Check Deposit", "Cash Withdrawal", "Cash Deposit", "Check Balance" };
 int serviceTime[] = { 3, 2, 5, 1 };
 int arrivalTime[6] = {};
+int departureTime[6] = {};
 
 void insertQueue(QueueInterface<string>* queuePtr) {
     srand(time(0));  // Initialize random number generator.
     int randNum = (rand() % 59) + 1;
-    cout << "randNum: " << randNum << "\n";
 
     for (int i = 0; i < 6; i++)
     {
@@ -90,9 +90,9 @@ void manageQueue(QueueInterface<string>* queuePtr) {
     int customersWaitTime[6] = {};
 
     for (int i = 0; i < 7; i++) {
-        int randTransaction = (rand() % 4) + 1;
+        int randTransaction = (rand() % 3) + 0;
         if (i == 0) {
-            cout << "--------------------------------------------------------------------------------\n";
+            cout << "----------------------------------------------------------------------------\n";
             try
             {
                 cout << "peekFront: " << queuePtr->peekFront() << endl;
@@ -102,8 +102,8 @@ void manageQueue(QueueInterface<string>* queuePtr) {
                 cout << e.what() << endl;
                 break;
             }  // end try/catch
-            cout << customers[i] << " has chosen " << transactionType[randTransaction - 1] << ", Expected Service Time: " << serviceTime[randTransaction - 1] << " minute(s).\n";
-            customersWaitTime[i] = serviceTime[randTransaction - 1];
+            cout << customers[i] << " has chosen " << transactionType[randTransaction] << ", Expected Service Time: " << serviceTime[randTransaction] << " minute(s).\n";
+            customersWaitTime[i] = serviceTime[randTransaction];
             cout << customers[i] << "'s Total Wait Time: " << customersWaitTime[i] << " minute(s).\n";
             cout << customers[i] << " has left the bank at ";
 
@@ -119,6 +119,7 @@ void manageQueue(QueueInterface<string>* queuePtr) {
                 else if (arrivalTime[i] - 60 <= 40)
                     cout << "10:" << (arrivalTime[i] + customersWaitTime[i]) - 60 << " AM.\n";
             }
+            departureTime[i] = (arrivalTime[i] + customersWaitTime[i]);
             queuePtr->dequeue();
             cout << "--------------------------------------------------------------------------------\n";
         }
@@ -133,17 +134,63 @@ void manageQueue(QueueInterface<string>* queuePtr) {
                 break;
             }  // end try/catch
 
-            cout << customers[i] << " has chosen " << transactionType[randTransaction - 1] << ", Expected Service Time: " << serviceTime[randTransaction - 1] << " minute(s).\n";
-            
-            //EDIT THIS..!!!!!
-            
-            if (arrivalTime[i]-arrivalTime[i-1] < serviceTime[randTransaction - 1])
-                customersWaitTime[i] = serviceTime[randTransaction - 1];
-            cout << customers[i] << "'s Total Wait Time: " << customersWaitTime[i] << " minute(s).\n";
-            cout << customers[i] << " is now leaving the bank\n";
-            queuePtr->dequeue();
-            cout << "--------------------------------------------------------------------------------\n";
+            cout << customers[i] << " has chosen " << transactionType[randTransaction] << ", Expected Service Time: " << serviceTime[randTransaction] << " minute(s).\n";
 
+
+            if (arrivalTime[i] >= departureTime[i - 1]) {
+                customersWaitTime[i] = serviceTime[randTransaction];
+                cout << customers[i] << "'s Total Wait Time: " << customersWaitTime[i] << " minute(s).\n";
+                cout << customers[i] << " has left the bank at ";
+
+                if ((arrivalTime[i] + customersWaitTime[i]) >= 1 && (arrivalTime[i] + customersWaitTime[i]) <= 9) {
+                    cout << "09:0" << (arrivalTime[i] + customersWaitTime[i]) << " AM.\n";
+                }
+                else if ((arrivalTime[i] + customersWaitTime[i]) >= 10 && (arrivalTime[i] + customersWaitTime[i]) <= 59) {
+                    cout << "09:" << (arrivalTime[i] + customersWaitTime[i]) << " AM.\n";
+                }
+                else if ((arrivalTime[i] + customersWaitTime[i]) >= 60 && (arrivalTime[i] + customersWaitTime[i]) <= 100) {
+                    if (arrivalTime[i] - 60 <= 9)
+                        cout << "10:0" << (arrivalTime[i] + customersWaitTime[i]) - 60 << " AM.\n";
+                    else if (arrivalTime[i] - 60 <= 40)
+                        cout << "10:" << (arrivalTime[i] + customersWaitTime[i]) - 60 << " AM.\n";
+                }
+                departureTime[i] = (arrivalTime[i] + customersWaitTime[i]);
+                queuePtr->dequeue();
+            }
+            else if (arrivalTime[i] < departureTime[i - 1]) {
+                int tempNum = (departureTime[i - 1] - arrivalTime[i]) + serviceTime[randTransaction];
+                departureTime[i] = arrivalTime[i] + tempNum;
+
+                customersWaitTime[i] = tempNum;
+                cout << customers[i] << "'s Total Wait Time: " << customersWaitTime[i] << " minute(s).\n";
+                cout << customers[i] << " has left the bank at ";
+
+                if ((arrivalTime[i] + customersWaitTime[i]) >= 1 && (arrivalTime[i] + customersWaitTime[i]) <= 9) {
+                    cout << "09:0" << (arrivalTime[i] + customersWaitTime[i]) << " AM.\n";
+                }
+                else if ((arrivalTime[i] + customersWaitTime[i]) >= 10 && (arrivalTime[i] + customersWaitTime[i]) <= 59) {
+                    cout << "09:" << (arrivalTime[i] + customersWaitTime[i]) << " AM.\n";
+                }
+                else if ((arrivalTime[i] + customersWaitTime[i]) >= 60 && (arrivalTime[i] + customersWaitTime[i]) <= 99) {
+                    if (arrivalTime[i] - 60 <= 9)
+                        cout << "10:0" << (arrivalTime[i] + customersWaitTime[i]) - 60 << " AM.\n";
+                    else if (arrivalTime[i] - 60 <= 40)
+                        cout << "10:" << (arrivalTime[i] + customersWaitTime[i]) - 60 << " AM.\n";
+                }
+                else if ((arrivalTime[i] + customersWaitTime[i]) >= 100 && (arrivalTime[i]+customersWaitTime[i]) <= 119) {
+                    if (arrivalTime[i] - 60 <= 9)
+                        cout << "10:0" << (arrivalTime[i] + customersWaitTime[i]) - 60 << " AM.\n";
+                    else if (arrivalTime[i] - 60 <= 40)
+                        cout << "10:" << (arrivalTime[i] + customersWaitTime[i]) - 60 << " AM.\n";
+                }
+
+
+
+
+                departureTime[i] = (arrivalTime[i] + customersWaitTime[i]);
+                queuePtr->dequeue();
+            }
+            cout << "--------------------------------------------------------------------------------\n";
         }
     }
 }
@@ -152,9 +199,9 @@ int main()
 {
     QueueInterface<string>* queuePtr = new ArrayQueue<string>();
     
-    cout << "\t\t\t\t\t\t   CSC326 Lab 5 - Banking Simulation\n";
-    cout << "\t\t\t\t\t\t       The Time Now is 09:00 AM\n";
-    cout << "\t\t\t--------------------------------------------------------------------------------------------------\n\n";
+    cout << "\t\t\t\t\t   CSC326 Lab 5 - Banking Simulation\n";
+    cout << "\t\t\t\t\t       The Time Now is 09:00 AM\n";
+    cout << "\t\t----------------------------------------------------------------------------------------\n\n";
 
     cout << "Transaction Types:\n";
     for (int i = 0; i < 4; i++) {
@@ -173,7 +220,6 @@ int main()
 
     cout << "\nManaging the queue:\n";
     manageQueue(queuePtr);
-
 
 
     return 0;
