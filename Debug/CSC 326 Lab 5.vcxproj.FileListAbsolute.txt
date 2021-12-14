@@ -1,3 +1,0 @@
-C:\Users\User\source\repos\CSC 326 Lab 5\Debug\CSC 326 Lab 5.exe
-C:\Users\User\source\repos\CSC 326 Lab 5\Debug\CSC 326 Lab 5.pdb
-C:\Users\User\Desktop\CSC 326 Lab 5\csc326-lab5\Debug\CSC 326 Lab 5.exe
