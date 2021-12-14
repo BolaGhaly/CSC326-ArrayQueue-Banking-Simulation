@@ -2,5 +2,5 @@
 C:\Users\User\source\repos\CSC 326 Lab 5\ArrayQueue.h(31,1): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
 C:\Users\User\source\repos\CSC 326 Lab 5\ArrayQueue.h(32): message : see reference to class template instantiation 'ArrayQueue<ItemType>' being compiled
 C:\Users\User\source\repos\CSC 326 Lab 5\ArrayQueue.cpp(45,1): warning C4290: C++ exception specification ignored except to indicate a function is not __declspec(nothrow)
-C:\Users\User\source\repos\CSC 326 Lab 5\Source.cpp(16,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\User\source\repos\CSC 326 Lab 5\Source.cpp(21,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   CSC 326 Lab 5.vcxproj -> C:\Users\User\source\repos\CSC 326 Lab 5\Debug\CSC 326 Lab 5.exe
