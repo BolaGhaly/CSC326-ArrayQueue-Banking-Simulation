@@ -1,5 +1,3 @@
-//Bola Ghaly
-//Lab 5 - Banking Simulation using array-based implementation
 #include "ArrayQueue.h"
 #include <iostream>
 #include <iomanip> //used for setprecision(2) for average wait time
@@ -93,7 +91,7 @@ void insertQueue(QueueInterface<string>* queuePtr) {
 //Manages the Queue by -
 //1- If Teller is free and someone is waiting then the customer at the front of the line moves to the teller.
 //2- The service time is initialized (depending on a random transaction chosen by the random generator)
-//and the customer’s total wait time can be determined.
+//and the customerâ€™s total wait time can be determined.
 //3- When the customer is done, they leave the bank (dequeue) and it output their depature time.
 //4- Keeps running and checking until the queue is empty (peekFront).
 void manageQueue(QueueInterface<string>* queuePtr) {
