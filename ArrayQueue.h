@@ -1,10 +1,3 @@
-//  Created by Frank M. Carrano and Timothy M. Henry.
-//  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
-
-/** ADT queue: Circular array-based implementation.
- Listing 14-4.
- @file ArrayQueue.h */
-
 #ifndef ARRAY_QUEUE_
 #define ARRAY_QUEUE_
 
