@@ -1,9 +1,3 @@
-//  Created by Frank M. Carrano and Timothy M. Henry.
-//  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
-
-/** Listing 13-1.
- @file QueueInterface.h */
-
 #ifndef QUEUE_INTERFACE_
 #define QUEUE_INTERFACE_
 
